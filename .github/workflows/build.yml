@@ -15,7 +15,7 @@ jobs:
         run: Install-Module ps2exe -Scope CurrentUser -Force -AllowClobber
       - name: Build EXE
         shell: powershell
-        run: Invoke-ps2exe -InputFile ".\DriverChecker.ps1" -OutputFile ".\DriverChecker.exe" -NoConsole -STA -DPIAware -WinFormsDPIAware -SupportOS -Title "Driver Checker" -Description "Official-source Windows driver checker" -Product "Driver Checker" -Company "Gilbert-Josh" -Version "1.0.0.0"
+        run: Invoke-ps2exe -InputFile ".\DriverChecker.ps1" -OutputFile ".\DriverChecker.exe" -NoConsole -STA -DPIAware -WinFormsDPIAware -SupportOS -Title "Driver Checker" -Description "Official-source Windows driver checker" -Product "Driver Checker" -Company "Gilbert-Josh" -Version "1.0.1.0"
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
