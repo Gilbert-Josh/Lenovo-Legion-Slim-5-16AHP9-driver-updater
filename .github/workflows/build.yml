@@ -1,0 +1,24 @@
+name: Build Driver Checker
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PS2EXE
+        shell: powershell
+        run: Install-Module ps2exe -Scope CurrentUser -Force -AllowClobber
+      - name: Build EXE
+        shell: powershell
+        run: Invoke-ps2exe -InputFile ".\DriverChecker.ps1" -OutputFile ".\DriverChecker.exe" -NoConsole -STA -DPIAware -WinFormsDPIAware -SupportOS -Title "Driver Checker" -Description "Official-source Windows driver checker" -Product "Driver Checker" -Company "Gilbert-Josh" -Version "1.0.0.0"
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DriverChecker-Windows
+          path: DriverChecker.exe
+          if-no-files-found: error
